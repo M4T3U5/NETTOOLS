@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NETTOOLS - CALCULADORA BINÁRIA</title>
+    <style>
+        h1, h2, h3, h4, h5, h6 {
+            color: white;
+        }
+        a {
+            color: rgb(168, 231, 20);
+        }
+        html {
+            background-color: blue;
+            
+        }
+
+        .div-header {
+            margin: auto;
+            width: 50%;
+            align-items: center;
+            align-content: center;
+            text-align: center;
+            background-color: rgb(81, 81, 180);
+            border: 1px solid black;
+            border-radius: 8px;
+            width: 80%;
+            margin-bottom: 15px;
+        }
+
+        .div-fields {
+            margin: auto;
+            font-family: monospace;
+            width: 50%;
+            border: 3px solid rgb(19, 4, 75);
+            padding: 10px;
+            background-color: rgb(140, 195, 240);
+            border-radius: 8px;
+            width: fit-content;
+            padding: 50px;
+        }
+
+
+    </style>
+
+    <link rel="icon" type="image/png" href="data:image/png;base64,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"/>
+</head>
+<body>
+
+    <div class="div-header">
+        <h1>NETTOOLS</h1>
+        <h2>CALCULADORA BINÁRIA</h2><br>
+    </div>
+
+    <div class="div-fields">
+        
+        <form name="calculadora" action="/calculadora-binaria" method="POST" onsubmit="return validateForm()">
+
+            <label for="binary-calculator-value">INSIRA O VALOR....:</label>
+            <input type="text" id="binary-calculator-value" name="binary-calculator-value"><br><br>
+
+            <center><input type="submit" value="Calcular"></center>
+            <button onclick="doSubmit()">CLIQUE</button>
+            
+        </form>
+
+        {% if calculated_result %}
+
+        <p>resultado: {{ calculated_result }}</p>
+
+        {% else %}
+
+        {% endif %} 
+
+    </div>
+</body>
+<script>
+
+function validateForm() {
+
+    console.log(document.forms["calculadora"]["binary-calculator-value"].value);
+
+    if (document.forms["calculadora"]["binary-calculator-value"].value == "") {
+      alert("POR FAVOR, INSIRA UM VALOR VÁLIDO");
+      return false;
+    }
+}
+</script>    
+
+<script type="text/javascript" src="{{ url_for('static', filename='jquery-3.2.1.min.js') }}"></script>
+
+    function doSubmit(){
+        $.ajax({
+        type: "POST",
+        url: "/calculadora-binaria",
+        data: document.forms["calculadora"]["binary-calculator-value"].value,
+        success: func(data){ 
+            console.log('dados inseridos com sucesso');
+        },
+        });
+
+    }
+</script>
+
+</html>
