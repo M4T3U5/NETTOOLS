@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GERADOR DE CONFIGURAÇÃO BGP</title>
+    <style>
+        h1, h2, h3, h4, h5, h6 {
+            color: white;
+        }
+        a {
+            color: rgb(168, 231, 20);
+        }
+        html {
+            background-color: rgb(208, 236, 255);
+            
+        }
+
+        .div-header {
+            margin: auto;
+            width: 50%;
+            align-items: center;
+            align-content: center;
+            text-align: center;
+            background-color: rgb(255, 255, 255);
+            border: 1px solid black;
+            border-radius: 8px;
+            width: 80%;
+            margin-bottom: 15px;
+            
+        }
+
+        .div-header h1, h2 {
+            color: black;
+        }
+
+        .div-fields {
+            margin: auto;
+            font-family: monospace;
+            width: 50%;
+            border: 3px solid rgb(19, 4, 75);
+            padding: 10px;
+            background-color: rgb(255, 222, 161);
+            border-radius: 8px;
+            width: fit-content;
+            padding: 50px;
+        }
+
+
+    </style>
+
+    <link rel="icon" type="image/png" href="data:image/png;base64,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"/>
+</head>
+<body>
+
+  <div class="div-header">
+    <img src="https://megalinkpiaui.com.br/images/megalink.png">
+    <h2>CHECKLIST PROCEDIMENTOS FTTH</h2><br>
+  </div>
+
+        {% if formulario %}
+
+    <center>
+      <textarea id="story" name="story" rows="20" cols="50">
+{{ formulario }}
+        </textarea>
+    </center>
+
+        {% else %}
+
+        <div class="div-fields">
+        
+          <form name="check-fields" action="/checklist" method="POST">
+  
+              <input name="checkfield" type="checkbox" id="1" value="1">
+              <label for="1">LOS</label><br>
+              <br>
+  
+              <input name="checkfield" type="checkbox" id="2" value="2">
+              <label for="2">Fatura em aberta</label><br>
+              <br>
+  
+              <input name="checkfield" type="checkbox" id="3" value="3">
+              <label for="3">IP no Voalle</label><br>
+              <br>
+  
+              <input name="checkfield" type="checkbox" id="4" value="4">
+              <label for="4">Energia</label><br>
+              <br>
+  
+              <input name="checkfield" type="checkbox" id="5" value="5">
+              <label for="5">Sinal da ONU</label><br>
+              <br>
+  
+              <input name="checkfield" type="checkbox" id="6" value="6">
+              <label for="6">Cabo conectado na WAN</label><br>
+              <br>
+  
+              <input name="checkfield" type="checkbox" id="7" value="7">
+              <label for="7">PPPoE</label><br>
+              <br>
+  
+              <input name="checkfield" type="checkbox" id="8" value="8">
+              <label for="8">Problema Generalizado</label><br>
+              <br>
+  
+              <input name="checkfield" type="checkbox" id="9" value="9">
+              <label for="9">PON</label><br>
+              <br>
+  
+              <input name="checkfield" type="checkbox" id="10" value="10">
+              <label for="10">Travado no Concentrador</label><br>
+              <br>
+              <br>
+              <br>
+  
+              <label for="problema">Problema Verificado:</label>
+              <select id="" name="problema">
+                  <option value="1">Sem energia</option>
+                  <option value="2">Cabo conectado de forma errada</option>
+                  <option value="3">Bloqueio Financeiro</option>
+                  <option value="4">Equipamento desligado</option>
+                  <option value="5">LOS</option>
+                  <option value="6">Roteador travado</option>
+                  <option value="7">Configuração PPPoE</option>
+                  <option value="8">Atenuação</option>
+                  <option value="9">Problema Generalizado</option>
+              </select>
+              <br><br><br><br>
+  
+              <center><input type="submit" value="Submeter"></center>
+              
+          </form>
+  
+
+        {% endif %} 
+
+    </div>
+
+<script>
+
+function validateForm() {
+
+    if (document.forms["bgpconf"]["nome"].value == "") {
+      alert("O Nome do Cliente Deve Ser Informado");
+      return false;
+    }
+
+    else if (document.forms["bgpconf"]["asn"].value == "") {
+      alert("O ASN NÃO PODE FICAR EM BRANCO");
+      return false;
+    }
+
+    else if (document.forms["bgpconf"]["vlan"].value == "") {
+      alert("A INTERFACE VLAN DEVE SER EPSECIFICADA");
+      return false;
+    }
+
+    else if (document.forms["bgpconf"]["p2pipv4"].value == "") {
+      alert("O BLOCO DE PONTO A PONTO IPV4 DEVE SER ESPECIFICADO");
+      return false;
+    }
+
+    else if (document.forms["bgpconf"]["p2pipv6"].value == "") {
+      alert("O BLOCO DE PONTO A PONTO IPV6 DEVE SER ESPECIFICADO");
+      return false;
+    }
+
+    else if (document.forms["bgpconf"]["blocoipv4"].value == "") {
+      alert("O BLOCO IPV4 DO PEER ASN DEVE SER ESPECIFICADO");
+      return false;
+    }
+
+    else if (document.forms["bgpconf"]["blocoipv6"].value == "") {
+      alert("O BLOCO IPV6 DO PEER ASN DEVE SER ESPECIFICADO");
+      return false;
+    }
+
+    else if (document.forms["bgpconf"]["community"].value == "") {
+      alert("CASO A COMMUNITY NÃO SEJA INFORMADA, IRÁ SER SETADA A COMMUNITY DEFAULT");
+      return true;
+    }
+
+  }
+
+</script>    
+
+</body>
+
+</html>

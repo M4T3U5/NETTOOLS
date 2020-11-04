@@ -25,6 +25,55 @@ def CalculadoraBinaria():
         valor = request.form.get('binary-calculator-value')
         return render_template('calculadora-binaria.html', calculated_result=valor)
 
+@app.route('/checklist', methods=('GET', 'POST'))
+def checklist():
+    if request.method == "GET":
+        return render_template('megalink_checkbox.html')
+
+    if request.method == "POST":
+        checked_options_list = []
+        checked_options_list = request.form.getlist('checkfield')
+
+    VALORES = {
+        "1":"CLIENTE COM ONU EM LOS",
+        "2":"CLIENTE COM FATURA EM ABERTO",
+        "3":"CLIENTE COM IP NO VOALLE" ,
+        "4":"CLIENTE COM ONU SEM ENERGIA",
+        "5":"RECEBO SINAL DA ONU",
+        "6":"CABO CONECTADO NA WAN",
+        "7":"DISCAGEM PPPOE",
+        "8":"PROBLEMA GENERALIZADO",
+        "9":"PON",
+        "10":"TRAVADO NO CONCENTRADOR"
+    }
+
+    data = ""
+
+    for key in VALORES:
+
+        if key in checked_options_list:
+            data += "sim[X]  não[ ] - "+VALORES.get(key)+"\n"
+        else:
+            data += "sim[ ]  não[X] - "+VALORES.get(key)+"\n"
+
+        problema_verificado = request.form.get('problema')
+
+        problemas = [
+            "SEM ENERGIA",
+            "CABO CONECTADO DE FORMA ERRADA",
+            "BLOQUEIO FINANCEIRO",
+            "EQUIPAMENTO DESLIGADO",
+            "LOS",
+            "ROTEADOR TRAVADO",
+            "CONFIGURAÇÃO PPPOE",
+            "ATENUAÇÃO",
+            "PROBLEMA GENERALIZADO"
+            ]
+
+    data += "\n\n       PROBLEMA VERIFICADO:\n\n"+ problemas[int(problema_verificado)-1]
+
+    return render_template('megalink_checkbox.html', formulario=data)
+
 @app.route('/whois', methods=('GET', 'POST'))
 def Whois():
     if request.method == "GET":
